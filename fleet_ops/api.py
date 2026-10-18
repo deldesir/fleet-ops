@@ -8,7 +8,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 import frappe
-from frappe.utils import cint, flt, get_system_timezone
+from frappe.utils import getdate, nowdate, cint, flt, get_system_timezone
 
 BACKUP_STALE_HOURS = 36
 STATUS_MAP = {"OK": "OK", "WARN": "WARN", "CRIT": "CRIT", "STALE": "STALE", "FAILED": "CRIT"}
@@ -51,6 +51,10 @@ def _apply_check(doc, chk, current_release):
     doc.tls_days_left = cint(chk.get("tls_days_left") or 0)
     doc.disk_free_gb = cint(chk.get("disk_free_gb") or 0)
     doc.open_shifts = cint(chk.get("open_shifts") or 0)
+    if "overdue_days" in chk:
+        doc.outstanding = flt(chk.get("outstanding") or 0)
+        doc.overdue_days = cint(chk.get("overdue_days") or 0)
+        doc.oldest_due = (str(chk["oldest_due"])[:10] if chk.get("oldest_due") else None)
     doc.behind_release = 1 if chk.get("behind_release") else 0
     doc.domain_registrar = chk.get("domain_registrar") or doc.domain_registrar
     if chk.get("domain_expiry"):
@@ -171,6 +175,25 @@ def rename_box(old, new, alias=None):
         frappe.db.set_value("Managed Box", new, "alias", alias)
     frappe.db.commit()
     return {"renamed": old != new, "box": new, "alias": alias or ""}
+
+
+@frappe.whitelist(methods=["GET"])
+def receivables():
+    """Unpaid Sales Invoices per Managed Box (through its Customer): outstanding total, oldest due
+    date, days overdue, count. The fleet command turns this into findings and status changes."""
+    frappe.only_for(("Fleet Manager", "System Manager"))
+    today = getdate(nowdate())
+    out = {}
+    for b in frappe.get_all("Managed Box", filters={"customer": ["!=", ""]}, fields=["name", "customer"]):
+        rows = frappe.get_all("Sales Invoice", filters={"customer": b.customer, "docstatus": 1, "outstanding_amount": [">", 0]},
+                              fields=["name", "due_date", "outstanding_amount", "currency"])
+        if not rows:
+            out[b.name] = {"outstanding": 0, "overdue_days": 0, "oldest_due": None, "invoices": 0, "currency": ""}
+            continue
+        oldest = min(getdate(r.due_date) for r in rows if r.due_date) if any(r.due_date for r in rows) else today
+        out[b.name] = {"outstanding": sum(flt(r.outstanding_amount) for r in rows), "overdue_days": max(0, (today - oldest).days),
+                       "oldest_due": str(oldest), "invoices": len(rows), "currency": rows[0].currency or ""}
+    return out
 
 
 @frappe.whitelist(methods=["GET"])

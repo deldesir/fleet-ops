@@ -39,6 +39,9 @@
   "tls_days_left",
   "disk_free_gb",
   "open_shifts",
+  "outstanding",
+  "overdue_days",
+  "oldest_due",
   "sb_domain",
   "domain_registrar",
   "cb_2244fb",
@@ -244,6 +247,26 @@
    "fieldname": "open_shifts",
    "fieldtype": "Int",
    "label": "Open POS Shifts",
+   "read_only": 1
+  },
+  {
+   "fieldname": "outstanding",
+   "fieldtype": "Currency",
+   "label": "Outstanding",
+   "read_only": 1,
+   "description": "Unpaid invoices of the linked Customer in this site (set by the nightly check)"
+  },
+  {
+   "fieldname": "overdue_days",
+   "fieldtype": "Int",
+   "label": "Overdue Days",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "oldest_due",
+   "fieldtype": "Date",
+   "label": "Oldest Due Date",
    "read_only": 1
   },
   {
