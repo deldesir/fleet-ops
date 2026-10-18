@@ -200,3 +200,19 @@ def current_manifest(box_id=None, token=None):
     rel = frappe.get_doc("Fleet Release", rid)
     lines = [f"# fleet release {rid}", f"release={rid}", f"captured={rel.captured}"] + [f"{a.app}={a.commit}" for a in rel.apps]
     return {"release": rid, "manifest": "\n".join(lines) + "\n"}
+
+
+@frappe.whitelist(methods=["POST"])
+def notify(subject, text, to=None):
+    """Mail a text to the operator through this site's own outgoing Email Account (configured
+    once in the desk: Settings -> Email Account). Used by `fleet digest --send` on a hub that
+    has no gateway, e.g. the control plane at home."""
+    frappe.only_for(("Fleet Manager", "System Manager"))
+    to = to or frappe.db.get_single_value("Fleet Settings", "operator_email") if frappe.db.exists("DocType", "Fleet Settings") else to
+    if not to:
+        to = frappe.db.get_value("User", {"enabled": 1, "user_type": "System User", "name": ["not in", ["Administrator", "Guest"]]}, "email") \
+             or frappe.db.get_value("User", "Administrator", "email")
+    if not frappe.db.exists("Email Account", {"enable_outgoing": 1}):
+        frappe.throw("no outgoing Email Account on this site")
+    frappe.sendmail(recipients=[to], subject=subject, message="<pre style='font-family:monospace'>" + frappe.utils.escape_html(text) + "</pre>", now=True)
+    return {"sent_to": to}
