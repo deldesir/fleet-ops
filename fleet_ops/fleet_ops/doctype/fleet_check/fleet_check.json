@@ -28,7 +28,10 @@
   "http_codes",
   "heads",
   "behind_release",
-  "raw"
+  "raw",
+  "crit_count",
+  "warn_count",
+  "findings"
  ],
  "fields": [
   {
@@ -53,7 +56,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "OK\nFAILED"
+   "options": "OK\nWARN\nCRIT\nSTALE"
   },
   {
    "fieldname": "release_current",
@@ -145,11 +148,27 @@
    "fieldtype": "Code",
    "label": "Raw",
    "options": "JSON"
+  },
+  {
+   "fieldname": "crit_count",
+   "fieldtype": "Int",
+   "label": "Critical Findings"
+  },
+  {
+   "fieldname": "warn_count",
+   "fieldtype": "Int",
+   "label": "Warnings"
+  },
+  {
+   "fieldname": "findings",
+   "fieldtype": "Code",
+   "label": "Findings",
+   "options": "JSON"
   }
  ],
  "grid_page_length": 50,
  "links": [],
- "modified": "2026-10-18 04:26:24.688760",
+ "modified": "2026-10-18 06:04:12.849242",
  "modified_by": "Administrator",
  "module": "Fleet Ops",
  "name": "Fleet Check",

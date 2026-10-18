@@ -209,9 +209,25 @@
    "open_in_new_tab": 1,
    "show_arrow": 0,
    "type": "Link"
+  },
+  {
+   "added": 0,
+   "child": 0,
+   "collapsible": 1,
+   "hidden": 0,
+   "icon": "layers",
+   "indent": 0,
+   "is_default_module": 0,
+   "keep_closed": 0,
+   "label": "Service Catalog",
+   "link_to": "Fleet Service",
+   "link_type": "DocType",
+   "open_in_new_tab": 1,
+   "show_arrow": 0,
+   "type": "Link"
   }
  ],
- "modified": "2026-10-18 04:39:37.291699",
+ "modified": "2026-10-18 06:04:13.779272",
  "modified_by": "Administrator",
  "module": "Fleet Ops",
  "name": "Fleet",

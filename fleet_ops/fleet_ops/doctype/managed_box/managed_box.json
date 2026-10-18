@@ -44,7 +44,12 @@
   "domain_expiry",
   "domain_days_left",
   "sb_notes",
-  "notes"
+  "notes",
+  "connectivity",
+  "services",
+  "agent_token_hash",
+  "crit_count",
+  "warn_count"
  ],
  "fields": [
   {
@@ -174,7 +179,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Last Check Status",
-   "options": "Unknown\nOK\nFAILED",
+   "options": "Unknown\nOK\nWARN\nCRIT\nSTALE",
    "read_only": 1
   },
   {
@@ -268,11 +273,44 @@
    "fieldname": "notes",
    "fieldtype": "Text Editor",
    "label": "Notes"
+  },
+  {
+   "default": "Public",
+   "fieldname": "connectivity",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Connectivity",
+   "options": "Public\nTailnet\nOffline"
+  },
+  {
+   "fieldname": "services",
+   "fieldtype": "Table",
+   "label": "Services",
+   "options": "Managed Box Service"
+  },
+  {
+   "fieldname": "agent_token_hash",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Agent Token Hash",
+   "read_only": 1
+  },
+  {
+   "fieldname": "crit_count",
+   "fieldtype": "Int",
+   "label": "Critical Findings",
+   "read_only": 1
+  },
+  {
+   "fieldname": "warn_count",
+   "fieldtype": "Int",
+   "label": "Warnings",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "links": [],
- "modified": "2026-10-18 04:26:24.194524",
+ "modified": "2026-10-18 06:04:12.139498",
  "modified_by": "Administrator",
  "module": "Fleet Ops",
  "name": "Managed Box",

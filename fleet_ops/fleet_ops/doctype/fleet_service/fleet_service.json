@@ -1,0 +1,159 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "field:service_id",
+ "creation": "2026-10-18 06:04:10.593234",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "service_id",
+  "title",
+  "kind",
+  "maturity",
+  "cb1",
+  "item",
+  "monthly_price",
+  "upstream",
+  "sb1",
+  "apps",
+  "units",
+  "probes",
+  "catalog_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "description": "Catalog id, e.g. erp, pos, whatsapp-assistant",
+   "fieldname": "service_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Service ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "kind",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Kind",
+   "options": "Box\nHub-hosted"
+  },
+  {
+   "fieldname": "maturity",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Maturity",
+   "options": "Ready\nOn request\nCandidate"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "What a Subscription Plan for this service sells",
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Billing Item",
+   "options": "Item"
+  },
+  {
+   "description": "List price per box per month; the Subscription Plan is the source of truth once set",
+   "fieldname": "monthly_price",
+   "fieldtype": "Currency",
+   "label": "Monthly Price"
+  },
+  {
+   "description": "Repository the app comes from, for candidates",
+   "fieldname": "upstream",
+   "fieldtype": "Data",
+   "label": "Upstream"
+  },
+  {
+   "fieldname": "sb1",
+   "fieldtype": "Section Break",
+   "label": "Technical"
+  },
+  {
+   "fieldname": "apps",
+   "fieldtype": "Small Text",
+   "label": "Apps",
+   "read_only": 1
+  },
+  {
+   "fieldname": "units",
+   "fieldtype": "Small Text",
+   "label": "Units",
+   "read_only": 1
+  },
+  {
+   "fieldname": "probes",
+   "fieldtype": "Code",
+   "label": "Probes",
+   "options": "JSON",
+   "read_only": 1
+  },
+  {
+   "fieldname": "catalog_notes",
+   "fieldtype": "Small Text",
+   "label": "Catalog Notes",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "links": [],
+ "modified": "2026-10-18 06:04:10.593234",
+ "modified_by": "Administrator",
+ "module": "Fleet Ops",
+ "name": "Fleet Service",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "maturity",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title",
+ "track_changes": 1
+}
