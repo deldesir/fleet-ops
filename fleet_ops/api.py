@@ -130,6 +130,7 @@ def sync(current_release=None, releases=None, boxes=None, catalog=None):
             continue
         doc = frappe.get_doc("Managed Box", bid) if frappe.db.exists("Managed Box", bid) else frappe.new_doc("Managed Box")
         doc.box_id = bid
+        doc.alias = b.get("alias") or bid
         for k in ("host", "business", "profile", "plan", "timezone", "maintenance_window", "billing_contact", "technical_contact"):
             setattr(doc, k, b.get(k) or "")
         doc.role = (b.get("role") or "customer").capitalize()
@@ -151,6 +152,25 @@ def sync(current_release=None, releases=None, boxes=None, catalog=None):
         n_box += 1
     frappe.db.commit()
     return {"catalog": n_cat, "releases": n_rel, "boxes": n_box, "checks": n_chk}
+
+
+@frappe.whitelist(methods=["POST"])
+def rename_box(old, new, alias=None):
+    """Rename a Managed Box: the record name follows the new id (links from Fleet Check and Fleet
+    Subscription are rewritten by rename_doc) and the alias is set. Used by `fleet rename`."""
+    frappe.only_for(("Fleet Manager", "System Manager"))
+    if not frappe.db.exists("Managed Box", old):
+        frappe.throw(f"no Managed Box {old}")
+    if old != new:
+        if frappe.db.exists("Managed Box", new):
+            frappe.throw(f"Managed Box {new} already exists")
+        from frappe.model.rename_doc import rename_doc   # the frappe.rename_doc wrapper drops ignore_permissions
+        rename_doc("Managed Box", old, new, force=True, ignore_permissions=True, show_alert=False)
+        frappe.db.set_value("Managed Box", new, "box_id", new)
+    if alias:
+        frappe.db.set_value("Managed Box", new, "alias", alias)
+    frappe.db.commit()
+    return {"renamed": old != new, "box": new, "alias": alias or ""}
 
 
 @frappe.whitelist(methods=["GET"])

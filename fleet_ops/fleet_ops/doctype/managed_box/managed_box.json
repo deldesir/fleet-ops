@@ -9,6 +9,7 @@
  "engine": "InnoDB",
  "field_order": [
   "box_id",
+  "alias",
   "host",
   "business",
   "customer",
@@ -60,6 +61,14 @@
    "label": "Box ID",
    "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "alias",
+   "fieldtype": "Data",
+   "label": "Alias",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "description": "Short handle people use (may change). The Box ID is given once and never changes."
   },
   {
    "fieldname": "host",
@@ -348,5 +357,6 @@
  "sort_order": "ASC",
  "states": [],
  "title_field": "business",
- "track_changes": 1
+ "track_changes": 1,
+ "search_fields": "alias,business,host"
 }
