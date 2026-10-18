@@ -18,7 +18,7 @@ The rows are written by the hub's `fleet` command (`fleet push`), which calls
 boxes behind the current release, stale backups, active subscriptions, overdue
 invoices and outstanding receivables.
 
-Install: `bench get-app <this repo>` then `bench --site <site> install-app fleet_ops`.
+Install: `bench get-app https://github.com/deldesir/fleet-ops.git` then `bench --site <site> install-app fleet_ops`.
 Requires ERPNext on the same site (for Customer, Subscription, Sales Invoice).
 
 License: MIT.
