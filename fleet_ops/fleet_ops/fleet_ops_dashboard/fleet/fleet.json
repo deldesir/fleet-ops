@@ -1,0 +1,44 @@
+{
+ "cards": [
+  {
+   "card": "Boxes Healthy"
+  },
+  {
+   "card": "Boxes Failing"
+  },
+  {
+   "card": "Behind Release"
+  },
+  {
+   "card": "Stale Backups"
+  },
+  {
+   "card": "Renewals Due In 30 Days"
+  },
+  {
+   "card": "Monthly Running Cost"
+  },
+  {
+   "card": "Active Customer Subscriptions"
+  },
+  {
+   "card": "Overdue Invoices"
+  },
+  {
+   "card": "Outstanding Receivables"
+  }
+ ],
+ "charts": [],
+ "creation": "2026-10-18 04:39:37.138910",
+ "dashboard_name": "Fleet",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2026-10-18 04:39:37.138910",
+ "modified_by": "Administrator",
+ "module": "Fleet Ops",
+ "name": "Fleet",
+ "owner": "Administrator"
+}

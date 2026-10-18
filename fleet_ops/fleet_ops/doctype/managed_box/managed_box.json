@@ -1,0 +1,314 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "field:box_id",
+ "creation": "2026-10-18 04:26:24.194524",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "box_id",
+  "host",
+  "business",
+  "customer",
+  "role",
+  "owner_type",
+  "cb_8ca178",
+  "status",
+  "profile",
+  "plan",
+  "subscription",
+  "canary_rank",
+  "timezone",
+  "maintenance_window",
+  "sb_contacts",
+  "billing_contact",
+  "cb_0c4423",
+  "technical_contact",
+  "sb_health",
+  "last_check",
+  "last_check_status",
+  "last_problems",
+  "release",
+  "behind_release",
+  "cb_5cc09c",
+  "hub_backup_age_h",
+  "backup_stale",
+  "tls_days_left",
+  "disk_free_gb",
+  "open_shifts",
+  "sb_domain",
+  "domain_registrar",
+  "cb_2244fb",
+  "domain_expiry",
+  "domain_days_left",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "description": "Short handle used by the fleet command",
+   "fieldname": "box_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Box ID",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "host",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Host",
+   "reqd": 1
+  },
+  {
+   "fieldname": "business",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Business"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "role",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Role",
+   "options": "Hub\nTill\nCustomer"
+  },
+  {
+   "fieldname": "owner_type",
+   "fieldtype": "Select",
+   "in_standard_filter": 1,
+   "label": "Owner",
+   "options": "Self\nCustomer"
+  },
+  {
+   "fieldname": "cb_8ca178",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nGrace\nSuspended\nOffboarded"
+  },
+  {
+   "fieldname": "profile",
+   "fieldtype": "Data",
+   "label": "Profile"
+  },
+  {
+   "fieldname": "plan",
+   "fieldtype": "Data",
+   "label": "Plan"
+  },
+  {
+   "fieldname": "subscription",
+   "fieldtype": "Link",
+   "label": "Customer Subscription",
+   "options": "Subscription"
+  },
+  {
+   "description": "Upgrade order, lowest first",
+   "fieldname": "canary_rank",
+   "fieldtype": "Int",
+   "label": "Canary Rank"
+  },
+  {
+   "fieldname": "timezone",
+   "fieldtype": "Data",
+   "label": "Timezone"
+  },
+  {
+   "description": "Box-local business time, e.g. 20:00-05:00",
+   "fieldname": "maintenance_window",
+   "fieldtype": "Data",
+   "label": "Maintenance Window"
+  },
+  {
+   "fieldname": "sb_contacts",
+   "fieldtype": "Section Break",
+   "label": "Contacts"
+  },
+  {
+   "fieldname": "billing_contact",
+   "fieldtype": "Data",
+   "label": "Billing Contact"
+  },
+  {
+   "fieldname": "cb_0c4423",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "technical_contact",
+   "fieldtype": "Data",
+   "label": "Technical Contact"
+  },
+  {
+   "fieldname": "sb_health",
+   "fieldtype": "Section Break",
+   "label": "Health"
+  },
+  {
+   "fieldname": "last_check",
+   "fieldtype": "Datetime",
+   "label": "Last Check",
+   "read_only": 1
+  },
+  {
+   "default": "Unknown",
+   "fieldname": "last_check_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Last Check Status",
+   "options": "Unknown\nOK\nFAILED",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_problems",
+   "fieldtype": "Small Text",
+   "label": "Last Problems",
+   "read_only": 1
+  },
+  {
+   "fieldname": "release",
+   "fieldtype": "Link",
+   "label": "Release",
+   "options": "Fleet Release",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "behind_release",
+   "fieldtype": "Check",
+   "label": "Behind Current Release",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_5cc09c",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hub_backup_age_h",
+   "fieldtype": "Float",
+   "label": "Hub Backup Age (h)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "backup_stale",
+   "fieldtype": "Check",
+   "label": "Backup Stale",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tls_days_left",
+   "fieldtype": "Int",
+   "label": "TLS Days Left",
+   "read_only": 1
+  },
+  {
+   "fieldname": "disk_free_gb",
+   "fieldtype": "Int",
+   "label": "Disk Free (GB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "open_shifts",
+   "fieldtype": "Int",
+   "label": "Open POS Shifts",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_domain",
+   "fieldtype": "Section Break",
+   "label": "Domain"
+  },
+  {
+   "fieldname": "domain_registrar",
+   "fieldtype": "Data",
+   "label": "Registrar",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_2244fb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "domain_expiry",
+   "fieldtype": "Date",
+   "label": "Domain Expiry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "domain_days_left",
+   "fieldtype": "Int",
+   "label": "Domain Days Left",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text Editor",
+   "label": "Notes"
+  }
+ ],
+ "grid_page_length": 50,
+ "links": [],
+ "modified": "2026-10-18 04:26:24.194524",
+ "modified_by": "Administrator",
+ "module": "Fleet Ops",
+ "name": "Managed Box",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "canary_rank",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "business",
+ "track_changes": 1
+}

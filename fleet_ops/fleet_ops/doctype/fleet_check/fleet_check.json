@@ -1,0 +1,191 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2026-10-18 04:26:24.688760",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "box",
+  "checked_at",
+  "status",
+  "release_current",
+  "cb_ef8a87",
+  "disk_free_gb",
+  "ram_avail_mb",
+  "errorlog_rows",
+  "failed_units",
+  "open_shifts",
+  "tls_days_left",
+  "domain_days_left",
+  "hub_backup_age_h",
+  "box_backup_age_h",
+  "sb_detail",
+  "problems",
+  "targets",
+  "http_codes",
+  "heads",
+  "behind_release",
+  "raw"
+ ],
+ "fields": [
+  {
+   "fieldname": "box",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Box",
+   "options": "Managed Box",
+   "reqd": 1
+  },
+  {
+   "fieldname": "checked_at",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Checked At",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "OK\nFAILED"
+  },
+  {
+   "fieldname": "release_current",
+   "fieldtype": "Data",
+   "label": "Current Release"
+  },
+  {
+   "fieldname": "cb_ef8a87",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "disk_free_gb",
+   "fieldtype": "Int",
+   "label": "Disk Free (GB)"
+  },
+  {
+   "fieldname": "ram_avail_mb",
+   "fieldtype": "Int",
+   "label": "RAM Available (MB)"
+  },
+  {
+   "fieldname": "errorlog_rows",
+   "fieldtype": "Int",
+   "label": "Error Log Rows Today"
+  },
+  {
+   "fieldname": "failed_units",
+   "fieldtype": "Int",
+   "label": "Failed Units"
+  },
+  {
+   "fieldname": "open_shifts",
+   "fieldtype": "Int",
+   "label": "Open POS Shifts"
+  },
+  {
+   "fieldname": "tls_days_left",
+   "fieldtype": "Int",
+   "label": "TLS Days Left"
+  },
+  {
+   "fieldname": "domain_days_left",
+   "fieldtype": "Int",
+   "label": "Domain Days Left"
+  },
+  {
+   "fieldname": "hub_backup_age_h",
+   "fieldtype": "Float",
+   "label": "Hub Backup Age (h)"
+  },
+  {
+   "fieldname": "box_backup_age_h",
+   "fieldtype": "Float",
+   "label": "Box Backup Age (h)"
+  },
+  {
+   "fieldname": "sb_detail",
+   "fieldtype": "Section Break",
+   "label": "Detail"
+  },
+  {
+   "fieldname": "problems",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Problems"
+  },
+  {
+   "fieldname": "targets",
+   "fieldtype": "Data",
+   "label": "Service Targets"
+  },
+  {
+   "fieldname": "http_codes",
+   "fieldtype": "Small Text",
+   "label": "HTTP Codes"
+  },
+  {
+   "fieldname": "heads",
+   "fieldtype": "Small Text",
+   "label": "App Heads"
+  },
+  {
+   "fieldname": "behind_release",
+   "fieldtype": "Small Text",
+   "label": "Apps Behind Release"
+  },
+  {
+   "fieldname": "raw",
+   "fieldtype": "Code",
+   "label": "Raw",
+   "options": "JSON"
+  }
+ ],
+ "grid_page_length": 50,
+ "links": [],
+ "modified": "2026-10-18 04:26:24.688760",
+ "modified_by": "Administrator",
+ "module": "Fleet Ops",
+ "name": "Fleet Check",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Fleet Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "checked_at",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "box",
+ "track_changes": 1
+}
