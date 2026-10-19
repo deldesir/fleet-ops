@@ -245,16 +245,31 @@ def current_manifest(box_id=None, token=None):
     return {"release": rid, "manifest": "\n".join(lines) + "\n"}
 
 
+def operator_email():
+    """A person's address: the Administrator's when it is real, else the first enabled System User
+    whose address is not a bot at this site's own domain (the fleet-bot API user)."""
+    admin = frappe.db.get_value("User", "Administrator", "email") or ""
+    if "@" in admin and not admin.endswith("@example.com"):
+        return admin
+    site_domain = "@" + frappe.local.site
+    for email in frappe.get_all("User", filters={"enabled": 1, "user_type": "System User", "name": ["not in", ["Administrator", "Guest"]]},
+                                pluck="email", order_by="creation asc"):
+        if email and "@" in email and not email.endswith(site_domain) and not email.endswith("@example.com"):
+            return email
+    return None
+
+
 @frappe.whitelist(methods=["POST"])
 def notify(subject, text, to=None):
     """Mail a text to the operator through this site's own outgoing Email Account (configured
     once in the desk: Settings -> Email Account). Used by `fleet digest --send` on a hub that
     has no gateway, e.g. the control plane at home."""
     frappe.only_for(("Fleet Manager", "System Manager"))
-    to = to or frappe.db.get_single_value("Fleet Settings", "operator_email") if frappe.db.exists("DocType", "Fleet Settings") else to
+    if not to and frappe.db.exists("DocType", "Fleet Settings"):
+        to = frappe.db.get_single_value("Fleet Settings", "operator_email")
+    to = to or operator_email()
     if not to:
-        to = frappe.db.get_value("User", {"enabled": 1, "user_type": "System User", "name": ["not in", ["Administrator", "Guest"]]}, "email") \
-             or frappe.db.get_value("User", "Administrator", "email")
+        frappe.throw("no recipient: pass `to`, or give a System User a real email address")
     if not frappe.db.exists("Email Account", {"enable_outgoing": 1}):
         frappe.throw("no outgoing Email Account on this site")
     frappe.sendmail(recipients=[to], subject=subject, message="<pre style='font-family:monospace'>" + frappe.utils.escape_html(text) + "</pre>", now=True)
