@@ -233,9 +233,13 @@ def report(box_id=None, token=None, check=None):
     return {"ok": True, "stored": stored}
 
 
-@frappe.whitelist(allow_guest=True, methods=["GET"])
+@frappe.whitelist(allow_guest=True, methods=["GET", "POST"])
 def current_manifest(box_id=None, token=None):
-    """The current release as manifest text, for fleet-agent's self-upgrade."""
+    """The current release as manifest text, for fleet-agent's self-upgrade.
+
+    POST is the intended form: the agent's token travels in the request body, not in a query
+    string that lands in the web server's access logs. GET stays accepted until every agent
+    has moved."""
     _box_for_token(box_id, token)
     rid = frappe.db.get_value("Fleet Release", {"is_current": 1}, "name")
     if not rid:
